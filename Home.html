@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARIS-Home</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=IBM%20Plex%20Sans:500|IBM%20Plex%20Sans:300");
+
+:root {
+  --m: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "IBM Plex Sans";
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 190vh;
+  margin: 0;
+  color: #d5d5d5;
+  font-size: calc(0.3 * var(--m));
+}
+
+h2 {
+  font-weight: 500;
+  text-align: center;
+  font-size: var(--m);
+  margin: 0;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: calc(0.6 * var(--m));
+  margin: 0;
+}
+
+.card {
+  height: calc(2 * var(--m));
+  width: calc(5 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  position: absolute;
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));
+  transition: filter 0.3s ease;
+  /* Existing styles */
+  left: -240px;
+  bottom: 250px;
+  z-index: -1;
+  filter: blur(10px); 
+  transition: filter 0.3s ease; 
+
+}
+
+.compiler {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin-top: calc(10 * var(--m));
+  
+}
+
+textarea {
+  width: calc(12 * var(--m));
+  height: calc(8 * var(--m));
+  border-radius: calc(0.5 * var(--m));
+  padding: calc(0.5 * var(--m));
+  font-family: "IBM Plex Sans";
+  font-size: calc(0.3 * var(--m));
+  background-color: #121212;
+  color: #d5d5d5;
+  border: none;
+}
+
+pre {
+  background-color: #121212;
+  padding: calc(0.5 * var(--m));
+  border-radius: calc(0.5 * var(--m));
+  width: calc(12 * var(--m));
+  color: #d5d5d5;
+  font-family: "IBM Plex Sans";
+  font-size: calc(0.3 * var(--m));
+  overflow-x: auto;
+}
+
+button {
+  background-color: #000;
+  font-size: calc(0.4 * var(--m));
+  border: none;
+  color: #e5e5e5;
+  font-family: "IBM Plex Sans";
+  font-weight: 400;
+  padding: calc(0.35 * var(--m)) calc(0.8 * var(--m));
+  border-radius: calc(0.3 * var(--m));
+}
+
+footer {
+  margin-top: 2800px;
+  z-index: 500;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 5rem 2vw;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 5%,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 1) 50%,
+    rgb(0, 0, 0)
+  );
+  z-index: -7;
+}
+
+
+.backdrop {
+  z-index: -5;
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+}
+
+
+.col1, .col2, .col3 {
+    flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: calc(0.3 * var(--m)) calc(0.8 * var(--m));
+  width: 28%;
+  background-color: #121212;
+  border-radius: calc(0.5 * var(--m));
+  position: relative;
+  bottom: -100px;
+  
+}
+
+
+.social {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link {
+  width: calc(0.8 * var(--m));
+  height: calc(0.8 * var(--m));
+  background-color: rgba(255,255,255,0.1);
+  border-radius: calc(0.1 * var(--m));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+  :root {
+    --m: 3rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  footer {
+    flex-direction: column;
+    padding: 5rem 20vw;
+  }
+  .col {
+    width: 100%;
+  }
+}
+.feature {
+    width: 30%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    border-radius: 10px;
+}
+#features {
+    padding: 50px 20px;
+    text-align: center;
+    position:absolute;
+    top: 350px;
+}
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.card1 {
+  height: calc(2 * var(--m));
+  width: calc(12 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  position: absolute;
+  top: 100px; 
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));  
+  
+}
+.feature1 {
+    width: 40%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    border-radius: 10px;
+  
+}
+#features1 {
+    padding: 50px 20px;
+    text-align: center;
+    position:absolute;
+    top: 680px;
+}
+.features1-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+img{
+    width: 600px;
+    height: 300px;
+
+}
+
+
+
+</style>
+
+<script>
+ async function compileAndRun() {
+    const code = document.getElementById("codeInput").value;
+    const outputElement = document.getElementById("output");
+
+    try {
+        // Send code to Python compiler API
+        const response = await fetch("https://python-compiler-api.example.com/compile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ code })
+        });
+        
+        // Parse response
+        const result = await response.json();
+
+        // Update output
+        outputElement.textContent = result.output;
+    } catch (error) {
+        console.error("Error:", error);
+        outputElement.textContent = "An error occurred while compiling the code.";
+    }
+}
+
+
+window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY;
+    const card = document.getElementById('solaris-card');
+    
+    // Calculate the blur amount based on scroll position
+    const blurAmount = Math.min(scrollPosition / 100, 10); // Adjust 100 as needed for scroll speed
+
+    // Apply blur effect to the card
+    card.style.filter = `blur(${blurAmount}px)`;
+
+    // Get the footer element
+    const footer = document.getElementById('footer');
+
+    // If scrolled, move the footer to the front
+    if (scrollPosition > 0) {
+        footer.style.zIndex = '1'; // Ensures footer remains on top
+    } else {
+        // If at the top, reset the z-index of the footer
+        footer.style.zIndex = '500'; // Reset footer z-index to its original value
+    }
+});
+
+</script>
+<body>
+    <!DOCTYPE html>
+
+<body>
+    <div class="card" id="solaris-card">
+        <h2>SOLARIS</h2>
+    </div>
+    
+
+    <section id="features">
+        <h2><a href="https://docs.oracle.com/cd/E37838_01/html/E60974/golls.html">Features</a></h2>
+        <div class="features-container">
+            <div class="feature">
+                <h3>ZFS File system</h3>
+                <p> offering advanced data management capabilities such as data integrity checking, automatic repair, snapshots, and efficient data compression.</p>
+            </div>
+            <div class="feature">
+                <h3>Service Management Facility (SMF)</h3>
+                <p>Providing advanced features: automatic restart of services,dependency management and comprehensive service monitoring.</p>
+            </div>
+            <div class="feature">
+                <h3>Crossbow Networking Virtualization</h3>
+                <p>Allows administrators to create virtual network interfaces, enabling better isolation, bandwidth control, and monitoring of network traffic.</p>
+            </div>
+        </div>
+    </section>
+    <div class="card1">
+        <h3><a href="embed.html">COMPILE YOUR CODE(PYTHON)</a></h3>
+    </div>
+    <section id="features1">
+        <h2 style="font-size: 70px;">Output</h2>
+        <div class="features1-container">
+            <div class="feature1">
+              <h2>Synchronisation</h2>
+            <img  src="synchron1.jpg" >    
+            </div>
+            <div class="feature1">
+              <h2>Scheduling</h2>
+                <img src="memcntl.jpg">  </div>
+            <div class="feature1">
+              <h2>fmadm</h2>
+                <img src="fmadm.jpg">  </div>
+            <div class="feature1">
+              <h2>pooladm</h2>
+                <img src="pooladm.jpg">  </div>
+                <div class="feature1">
+                  <h2>memcntl</h2>
+                    <img src="memcntl1.jpg">  </div>
+                    <div class="feature1">
+                      <h2>ptree</h2>
+                        <img src="ptree.jpg">  </div>
+                        <div class="feature1">
+                          <h2>Memory management</h2>
+                            <img src="memmanage.jpg">  </div>
+                          
+            
+    </section> 
+
+    <footer id="footer">
+        <div class="col1">
+            <h3> Group 8</h3>
+            <p><a href="Home.html"> Home </a></p>
+            <p><a href="solaris_codes.html"> Code Section </a></p>
+            <p><a href="embed.html"> python Compiler </a></p>
+            <p><a href="https://www.scaler.com/topics/cpp/online-cpp-compiler/"> C++ Compiler </a></p>
+            
+        </div>
+        <div class="col2">
+            <h3><a href=""></a>Description</h3>
+            <p>Solaris is a Unix-based operating system developed by Sun Microsystems (now Oracle Corporation) in the 1990s. It is known for its scalability, reliability, and performance, particularly in server environments. Solaris features advanced technologies such as the ZFS file system, DTrace for dynamic tracing and debugging, and Zones for operating system-level virtualization. It has been used widely in enterprise environments, especially in industries like finance, telecommunications, and government, but its popularity has waned in recent years with the rise of Linux distributions.
+
+                Features</p>
+        </div>
+        <div class="col3">
+            <h3>Our Team</h3>
+            <p>Jeet Thakur</p>
+            <p><a href="https://www.linkedin.com/in/gurusaranab/">Gurusaran A B</a></p>
+            <p><a href="https://www.linkedin.com/in/ghanukota-rishi-deep-687447284/">Ghanukota Rishideep</a></p>
+            <p>Ram Sreyas</p>
+        </div>
+        <div class="backdrop"></div>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Operating System</title>
+<link href="styles.css" rel="stylesheet">
+<style>
+    @import url("https://fonts.googleapis.com/css?family=IBM%20Plex%20Sans:500|IBM%20Plex%20Sans:300");
+ body {
+    background-color: black;
+  color: white;
+  font-family: "IBM Plex Sans";
+  font-weight: 300;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #d5d5d5;
+  font-size: calc(0.3 * var(--m));
+}
+.card1{
+  height: calc(2 * var(--m));
+  width: calc(6 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  position: absolute;
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));
+  transition: filter 0.3s ease;
+  /* Existing styles */
+  left: 300px;
+  bottom: 150px;
+  z-index: -1;
+  
+  transition: filter 0.3s ease; 
+
+}
+
+.neon-text {
+    position: relative;
+    font-size: 48px;
+    line-height: 1;
+    white-space: nowrap;
+    animation: neon 1s infinite alternate;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 70px #ff0000, 0 0 80px #ff0000, 0 0 100px #ff0000;
+}
+
+@keyframes neon {
+    from {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 70px #ff0000, 0 0 80px #ff0000, 0 0 100px #ff0000;
+    }
+    to {
+        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000, 0 0 35px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+    }
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color:black;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 100px;
+}
+
+h2 {
+    color: #ff0000;
+    
+    left: 100px;
+}
+
+.code-editor {
+    background-color: #1d1d1d;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.code-editor pre {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.code-editor code {
+    display: block;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #9013fe;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #be18ff;
+}
+
+.animated-element {
+    width: 100px;
+    height: 100px;
+    background-color: #9013fe;
+    margin-top: 20px;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.animated-element:hover {
+    transform: scale(1.1);
+}
+
+.code-container {
+    position: relative;
+}
+
+.copy-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1140px;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right;
+    height: calc(1* var(--m));
+  width: calc(4 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));  
+  position: absolute;
+  left: 800px;
+  bottom: -120px;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.show {
+    display: block;
+}
+
+.copy-button1 {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1140px;
+}
+
+.tooltiptext1 {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-button1:hover .tooltiptext1 {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-btn1 {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right;
+    height: calc(1* var(--m));
+  width: calc(4 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)); 
+  position: absolute;
+  left: 800px; 
+  top: 430px;
+}
+
+.dropdown-content1 {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.show1 {
+    display: block;
+}
+.copy-button2 {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1140px;
+}
+
+.tooltiptext2 {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-button2:hover .tooltiptext2 {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-btn2 {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right;
+    height: calc(1* var(--m));
+  width: calc(4 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));  
+  position: absolute;
+  left: 800px;
+  top: 530px;
+}
+
+.dropdown-content2 {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:black;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.show2 {
+    display: block;
+}
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {font-size: 11px}
+}
+footer {
+  margin-top: 80vh;
+  z-index: 500;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 5rem 2vw;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 5%,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 1) 50%,
+    rgb(0, 0, 0)
+  );
+  z-index: -7;
+  
+}
+
+.backdrop {
+  z-index: -5;
+  position: absolute;
+  inset: 0;
+
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+
+  -webkit-mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+}
+.col {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: calc(0.3 * var(--m)) calc(0.8 * var(--m));
+  width: 28%;
+}
+
+.col2, .col3 {
+  background-color: #121212;
+  border-radius: calc(2 * var(--m))
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  
+}
+
+.link {
+  width: calc(0.8 * var(--m));
+  height: calc(0.8 * var(--m));
+  background-color: rgba(255,255,255,0.1);
+  border-radius: calc(0.1 * var(--m));
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 1000px) {
+  :root {
+    --m: 3rem;
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+  footer {
+    flex-direction: column;
+    padding: 5rem 20vw;
+  }
+  .col {
+    width: 100%;
+  }
+}
+:root {
+  --m: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+.copy-button3 {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1140px;
+}
+
+.tooltiptext3 {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-button3:hover .tooltiptext2 {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-btn3 {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right;
+    height: calc(1* var(--m));
+  width: calc(4 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));  
+  position: absolute;
+  left: 800px;
+  top: 650px;
+}
+.dropdown-content3 {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    color: #fff;
+    margin-top: 10px;
+}
+.show3 {
+    display: block;
+}
+.copy-button4 {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1140px;
+}
+
+.tooltiptext4 {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-button4:hover .tooltiptext4 {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-btn4 {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right;
+    height: calc(1* var(--m));
+  width: calc(4 * var(--m));
+  background: linear-gradient(120deg, #e32a00, #725bdc);
+  color: black;
+  border-radius: calc(0.5 * var(--m));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--m);
+  margin: calc(2 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m)) calc(5 * var(--m));  
+  position: absolute;
+  left: 800px;
+  top: 750px;
+}
+.dropdown-content4 {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:black;
+    color: #fff;
+    margin-top: 10px;
+}
+.show4 {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+    <div class="card1"  id="solaris-card">
+        <h2 style="color: black;">CODES</h2>
+    </div>
+    
+    <div class="container" style="margin-top: 400px;">
+        
+        <section>
+    <h2 class = "h21" style="font-size: 50px;">Scheduling Algorithm
+    <button class="dropdown-btn" style="font-size: 20px;" onclick="toggleCode()">
+                <h3>v Show Code</h3> 
+            </button>
+    </h2>
+    <div class="dropdown-content" id="code-section">
+    <div class="code-editor">
+
+        <pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdbool.h&gt;
+#include&lt;stdlib.h&gt;
+
+    #define MAX_PROCESS 100
+    #define TIME_QUANTUM1 8
+    #define TIME_QUANTUM2 16
+    
+    struct process {
+        int pid;
+        int arrival_time;
+        int burst_time;
+        int remaining_time;
+        int completion_time;
+        int turnaround_time;
+        int queue_level;
+    };
+    
+    struct queue {
+        int front, rear, size;
+        struct process *array[MAX_PROCESS];
+    };
+    
+    struct queue *createQueue() {
+        struct queue q = (struct queue)malloc(sizeof(struct queue));
+        q->front = q->size = 0;
+        q->rear = MAX_PROCESS - 1;
+        return q;
+    }
+    
+    bool isEmpty(struct queue *q) {
+        return q->size == 0;
+    }
+    
+    bool isFull(struct queue *q) {
+        return q->size == MAX_PROCESS;
+    }
+    
+    void enqueue(struct queue *q, struct process *p) {
+        if (isFull(q)) {
+            printf("Queue Overflow\n");
+            return;
+        }
+        q->rear = (q->rear + 1) % MAX_PROCESS;
+        q->array[q->rear] = p;
+        q->size++;
+    }
+    
+    struct process *dequeue(struct queue *q) {
+        if (isEmpty(q)) {
+            printf("Queue Underflow\n");
+            return NULL;
+        }
+        struct process *p = q->array[q->front];
+        q->front = (q->front + 1) % MAX_PROCESS;
+        q->size--;
+        return p;
+    }
+    
+    void displayQueue(struct queue *q) {
+        if (isEmpty(q)) {
+            printf("Queue is empty\n");
+            return;
+        }
+        printf("Queue: ");
+        for (int i = q->front; i < q->front + q->size; i++) {
+            printf("P%d ", q->array[i % MAX_PROCESS]->pid);
+        }
+        printf("\n");
+    }
+    
+    void swap(struct process *a, struct process *b) {
+        struct process temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    
+    void sortByArrival(struct process p[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (p[j].arrival_time > p[j + 1].arrival_time) {
+                    swap(&p[j], &p[j + 1]);
+                }
+            }
+        }
+    }
+    
+    void ganttChart(struct process p[], int n) {
+        int time = 0;
+        //printf("Gantt Chart: \n|");
+    
+        while (true) {
+            bool allProcessesCompleted = true;
+            for (int i = 0; i < n; i++) {
+                if (p[i].remaining_time > 0) { // the process is still executing
+                    allProcessesCompleted = false;
+                    if (p[i].remaining_time > 0) {
+                        int time_slice = 1;
+                        printf(" P%d |", p[i].pid);
+                        time += time_slice;
+                        p[i].remaining_time -= time_slice;
+                        if (p[i].remaining_time <= 0) {
+                            p[i].completion_time = time;
+                            p[i].turnaround_time = p[i].completion_time - p[i].arrival_time;
+                        }
+                    }
+                }
+            }
+            if (allProcessesCompleted) {
+                break;
+            }
+        }
+        /printf("\n0 "); // displaying the completion time
+        for (int i = 0; i < n; i++) {
+            printf("%d ", p[i].completion_time);
+        }
+        printf("\n");
+    }
+    
+    
+    void MLFQ(struct process p[], int n) {
+        struct queue *q1 = createQueue();
+        struct queue *q2 = createQueue();
+        struct queue *q3 = createQueue();
+    
+        sortByArrival(p, n);
+    
+        int current_time = 0;
+        int i = 0;
+        int total_waiting_time = 0;
+    
+        while (!isEmpty(q1) || !isEmpty(q2) || !isEmpty(q3) || i < n) {
+            while (i < n && p[i].arrival_time <= current_time) {
+                p[i].queue_level = 1;
+                enqueue(q1, &p[i]); // inserting the processes to the first queue
+                i++;
+            }
+    
+            // Q1 processing
+            if (!isEmpty(q1)) {
+                struct process *temp = dequeue(q1);
+                if (temp->remaining_time > TIME_QUANTUM1) {
+                    temp->remaining_time -= TIME_QUANTUM1;
+                    current_time += TIME_QUANTUM1;
+                    temp->queue_level = 2;
+                    enqueue(q2, temp);
+                } else {
+                    current_time += temp->remaining_time;
+                    total_waiting_time += current_time - temp->arrival_time - temp->burst_time;
+                    temp->completion_time = current_time;
+                    temp->turnaround_time = temp->completion_time - temp->arrival_time;
+                    temp->remaining_time = 0;
+                }
+            } else if (!isEmpty(q2)) { // Q2 processing
+                struct process *temp = dequeue(q2);
+                if (temp->remaining_time > TIME_QUANTUM2) {
+                    temp->remaining_time -= TIME_QUANTUM2;
+                    current_time += TIME_QUANTUM2;
+                    temp->queue_level = 3; // move to Q3 after exceeding time quantum
+                    enqueue(q3, temp); // enqueue with remaining time
+                } else {
+                    current_time += temp->remaining_time;
+                    total_waiting_time += current_time - temp->arrival_time - temp->burst_time;
+                    temp->completion_time = current_time;
+                    temp->turnaround_time = temp->completion_time - temp->arrival_time;
+                    temp->remaining_time = 0;
+                }
+            } else if (!isEmpty(q3)) { // Q3 processing
+                struct process *temp = dequeue(q3);
+                current_time += temp->remaining_time;
+                total_waiting_time += current_time - temp->arrival_time - temp->burst_time;
+                temp->completion_time = current_time;
+                temp->turnaround_time = temp->completion_time - temp->arrival_time;
+                temp->remaining_time = 0;
+            } else {
+                // If no processes are in the queue, increment the current time to the next process arrival
+                if (i < n) {
+                    current_time = p[i].arrival_time;
+                }
+            }
+        }
+    
+        double avg_waiting_time = (double)total_waiting_time / n;
+        printf("Process\tArrival\tBurst\tCompletion\tTurnaround\tWaiting\n");
+        for (int i = 0; i < n; i++) {
+            printf("P%d\t%d\t%d\t%d\t\t%d\t\t%d\n", p[i].pid, p[i].arrival_time, p[i].burst_time,
+                   p[i].completion_time, p[i].turnaround_time, p[i].completion_time - p[i].arrival_time - p[i].burst_time);
+        }
+        printf("Average Waiting Time: %.2f\n", avg_waiting_time);
+        ganttChart(p, n);
+    }
+    
+    int main() {
+        int n;
+    
+        printf("Enter the number of processes: ");
+        scanf("%d", &n);
+    
+        if (n > MAX_PROCESS) {
+            printf("Error: Maximum number of processes is %d\n", MAX_PROCESS);
+            return 1;
+        }
+    
+        struct process processes[n];
+    
+        for (int i = 0; i < n; i++) {
+            printf("Enter arrival time for process P%d: ", i);
+            scanf("%d", &processes[i].arrival_time);
+            printf("Enter burst time for process P%d: ", i);
+            scanf("%d", &processes[i].burst_time);
+    
+            processes[i].remaining_time = processes[i].burst_time;
+            processes[i].pid = i;
+            processes[i].queue_level = 1;
+        }
+    
+        MLFQ(processes, n);
+    
+        return 0;
+    }
+}
+        </code></pre>
+    </div>
+            <button class="copy-button" onclick="copyCode()">
+        <i class="fas fa-copy"></i> Copy
+        <span class="tooltiptext">Copy to clipboard</span>
+    </button>
+    </div>
+</section>
+
+        <section>
+    <h2  style="font-size: 50px;">Memory Management Algorithm
+    <button class="dropdown-btn1" style="font-size: 20px;" onclick="toggleCode1()">
+        <h3>v Show Code</h3> 
+    </button>
+    </h2>
+
+    <div class="dropdown-content1" id="code-section-memory">
+        <div class="code-editor1">
+            <pre><code>
+                class BuddySystem:
+                def __init__(self, total_memory):
+                    self.total_memory = total_memory
+                    self.tree = [0] * (2 * total_memory - 1)  # Initialize binary tree with zeros
+                    self.max_block_size = total_memory
+            
+                def allocate_memory(self, size):
+                    if size <= 0 or size > self.total_memory:
+                        print("Invalid request size.")
+                        return -1
+            
+                    block_index = 0
+                    current_block_size = self.max_block_size
+            
+                    # Traverse the tree to find a suitable block
+                    while block_index < len(self.tree):
+                        if self.tree[block_index] == 0 and current_block_size >= size:
+                            break
+                        left_child = 2 * block_index + 1
+                        right_child = 2 * block_index + 2
+                        if left_child < len(self.tree) and self.tree[left_child] == 0:
+                            block_index = left_child
+                        elif right_child < len(self.tree) and self.tree[right_child] == 0:
+                            block_index = right_child
+                        else:
+                            print("Memory allocation failed. No suitable block found.")
+                            return -1
+                        current_block_size //= 2
+            
+                    if self.tree[block_index] != 0 or current_block_size < size:
+                        print("Memory allocation failed. No suitable block found.")
+                        return -1
+            
+                    # Allocate memory and update the tree
+                    self.tree[block_index] = size
+                    parent_index = (block_index - 1) // 2
+                    while block_index != 0:
+                        self.tree[parent_index] = max(self.tree[2 * parent_index + 1], self.tree[2 * parent_index + 2])
+                        block_index = parent_index
+                        parent_index = (block_index - 1) // 2
+            
+                    print(f"Memory of size {size} allocated successfully at block index {block_index}.")
+                    return block_index
+            
+                def deallocate_memory(self, block_index):
+                    if block_index < 0 or block_index >= len(self.tree) or self.tree[block_index] == 0:
+                        print("Invalid block index.")
+                        return
+            
+                    # Deallocate memory and update the tree
+                    self.tree[block_index] = 0
+                    parent_index = (block_index - 1) // 2
+                    while block_index != 0:
+                        self.tree[parent_index] = max(self.tree[2 * parent_index + 1], self.tree[2 * parent_index + 2])
+                        block_index = parent_index
+                        parent_index = (block_index - 1) // 2
+            
+                    print("Memory deallocated successfully.")
+            
+                def print_memory_status(self):
+                    print("Memory Block Status:")
+                    for i, size in enumerate(self.tree):
+                        print(f"Block {i}: Size {size}")
+                    print()
+            
+            
+            # Example usage
+            if __name__ == "__main__":
+                total_memory = 16
+                buddy_system = BuddySystem(total_memory)
+            
+                # Allocate memory
+                block_index1 = buddy_system.allocate_memory(4)
+                block_index2 = buddy_system.allocate_memory(8)
+                block_index3 = buddy_system.allocate_memory(3)
+            
+                # Print memory status
+                buddy_system.print_memory_status()
+            
+                # Deallocate memory
+                buddy_system.deallocate_memory(block_index2)
+            
+                # Print memory status after deallocation
+                buddy_system.print_memory_status()
+            
+            </code></pre>
+        </div>
+        <button class="copy-button1" onclick="copyCode1()">
+            <i class="fas fa-copy"></i> Copy
+            <span class="tooltiptext1">Copy to clipboard</span>
+        </button>
+    </div>
+</section>
+        <section>
+    <h2 class="h21" style="font-size: 50px;">Synchronising Problem
+    <button class="dropdown-btn2"style="font-size: 20px;" onclick="toggleCode2()">
+        <h3>v Show Code</h3> 
+    </button>
+    </h2>
+
+    <div class="dropdown-content2" id="code-section-synchronize">
+        <div class="code-editor2">
+            <pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;pthread.h&gt;
+#include&lt;semaphore.h&gt;
+#include&lt;time.h&gt;
+#include&lt;unistd.h&gt;    
+    // Define a semaphore
+    sem_t holdermach;
+    sem_t weldermach;
+    
+    // Shared resource
+    //int counter = 0;
+    
+    //the random function
+    double random_0_or_1() {
+        return rand() % 2;
+    }
+    
+    //0 means to cut, 1 means to weld the cardoor
+    
+    // Thread function
+    void* arms(void* arg) {
+    
+        int thread_index = *(int *)arg;
+        free(arg);  // Free the allocated memory for the integer
+    
+        while (1) {
+            if (random_0_or_1() == 1) {
+                printf("arm %d wants to weld\n",thread_index);
+                // Wait (decrement) the semaphore before accessing the shared resource
+                sem_wait(&holdermach);
+                printf("arm %d acquired the holder machine\n", thread_index);
+    
+                sem_wait(&weldermach);
+                printf("arm %d acquired the welding machine\n",thread_index);
+                printf("arm %d is welding the door now\n",thread_index);
+    
+                sleep(2);
+    
+                printf("%d completed welding\n", thread_index);
+    
+                // Signal (increment) the semaphore after accessing the shared resource
+                sem_post(&weldermach);
+                sem_post(&holdermach);
+            } else {
+                printf("%d wants to cut\n", thread_index);
+                sleep(2);
+            }
+    
+            // Optionally, add a small sleep to avoid busy-waiting too aggressively
+            usleep(100000);  // Sleep for 100 milliseconds
+        }
+    
+        return NULL;
+    }
+    
+    int main() {
+    
+    
+        srand(time(NULL));
+    
+        pthread_t threads[2];
+    
+        // Initialize the semaphore with a value of 1
+        if (sem_init(&holdermach, 0, 1) != 0) {
+            printf("holdermach initialization failed\n");
+            return 1;
+        }
+    
+        if (sem_init(&weldermach, 0, 1) != 0) {
+            printf("weldermach initialization failed\n");
+            return 1;
+        }
+    
+        // Create threads
+        for (int i = 0; i < 2; ++i) {
+        int *arg = malloc(sizeof(*arg));
+            if (arg == NULL) {
+                perror("Failed to allocate memory");
+                return 1;
+            }
+            *arg = i;
+    
+            if (pthread_create(&threads[i], NULL, arms, arg) != 0) {
+                printf("Error creating thread %d\n", i);
+                return 1;
+            }
+        }
+    
+        // Wait for all threads to finish
+        for (int i = 0; i < 2; ++i) {
+            if (pthread_join(threads[i], NULL) != 0) {
+                printf("Error joining thread %d\n", i);
+                return 1;
+            }
+        }
+    
+        // Destroy the semaphore
+        sem_destroy(&holdermach);
+        sem_destroy(&weldermach);
+    
+        return 0;
+    }
+            </code></pre>
+        </div>
+        <button class="copy-button2" onclick="copyCode2()">
+            <i class="fas fa-copy"></i> Copy
+            <span class="tooltiptext2">Copy to clipboard</span>
+        </button>
+    </div>
+</section>
+<section>
+    <h2 class="h24" style="font-size: 50px;">memcntl System Call:
+    <button class="dropdown-btn3"style="font-size: 20px;" onclick="toggleCode3()">
+        <h3>v Show Code</h3> 
+    </button>
+    </h2>
+
+    <div class="dropdown-content3" id="code-section-priocntl">
+        <div class="code-editor3">
+            <pre><code>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;    
+#include &lt;sys/mman.h&gt;
+    int main() {
+        void *addr = malloc(1024);
+        if (addr == NULL) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+    
+        printf("Memory allocated at address: %p\n", addr);
+    
+        // Lock the memory into RAM
+        if (mlock(addr, 1024) != 0) {
+            perror("mlock");
+            exit(EXIT_FAILURE);
+        }
+    
+        printf("Memory locked\n");
+    
+        // ... use the memory ...
+    
+        // Unlock the memory
+        if (munlock(addr, 1024) != 0) {
+            perror("munlock");
+            exit(EXIT_FAILURE);
+        }
+    
+        printf("Memory unlocked\n");
+    
+        free(addr);
+        return 0;
+    }
+
+
+            </code></pre>
+        </div>
+        <button class="copy-button3" onclick="copyCode3()">
+            <i class="fas fa-copy"></i> Copy
+            <span class="tooltiptext3">Copy to clipboard</span>
+        </button>
+    </div>
+</section>
+
+
+        
+
+
+
+    </div> 
+    <footer id="footer">
+        <div class="col col1">
+          <h3 style="font-size: 50px;">Group 8</h3>
+          
+        </div>
+        <div class="col col2">
+            <h3>Our Team</h3>
+          <p><a href="Home.html">Home</a></p>
+          <p><a href="embed.html">Compiler</a></p>
+          <p><a href="solaris_codes.html">Codes_section</a></p>
+          <p><a href="Home.html">Our team</a></p>
+        </div>
+        <div class="col col3">
+            <h3>Commands</h3>
+          <p>fmadm faulty</p>
+          <p>ptree</p>
+          <p>pooladm</p>
+        
+        </div>
+        
+        <div class="backdrop"></div>
+      </footer>
+
+    <script>
+        function animate() {
+            var element = document.querySelector('.animated-element');
+            element.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                element.style.transform = 'rotate(0)';
+            }, 500);
+        }
+        function toggleCode() {
+            var codeSection = document.getElementById('code-section');
+            codeSection.classList.toggle('show');
+        }
+        function toggleCode1() {
+            var codeSection = document.getElementById('code-section-memory');
+            codeSection.classList.toggle('show1');
+        }
+        function toggleCode2() {
+            var codeSection = document.getElementById('code-section-synchronize');
+            codeSection.classList.toggle('show2');
+        }
+        function toggleCode3() {
+            var codeSection = document.getElementById('code-section-priocntl');
+            codeSection.classList.toggle('show3');
+        }
+        
+
+
+        function copyCode() {
+            const code = document.querySelector('code');
+            navigator.clipboard.writeText(code.innerText)
+                .then(() => {
+                    alert('Code copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+        function copyCode1() {
+            const code = document.querySelector('#code-section-memory code');
+            navigator.clipboard.writeText(code.innerText)
+                .then(() => {
+                    alert('Code copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+        function copyCode2() {
+            const code = document.querySelector('#code-section-synchronize code');
+            navigator.clipboard.writeText(code.innerText)
+                .then(() => {
+                    alert('Code copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+        function copyCode3() {
+            const code = document.querySelector('#code-section-systemcall code');
+            navigator.clipboard.writeText(code.innerText)
+                .then(() => {
+                    alert('Code copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+        
+    var slideIndex = 0;
+
+    function showSlides() {
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+
+        if (slideIndex >= slides.length) {
+            slideIndex = 0;
+        }
+        if (slideIndex < 0) {
+            slideIndex = slides.length - 1;
+        }
+
+        for (var i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        slides[slideIndex].style.display = "block";
+        dots[slideIndex].className += " active";
+    }
+
+    function plusSlides(n) {
+        slideIndex += n;
+        showSlides();
+    }
+
+    showSlides();
+
+
+    </script>
+</body>
+</html>
